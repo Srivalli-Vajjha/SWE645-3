@@ -1,5 +1,3 @@
-//This file with create a CI/CD pipeline for building and deploying the dcoker image to k8 cluster using Github as source control version.
-
 pipeline{
     
     environment {
@@ -10,7 +8,7 @@ agent any
     tools{
         maven 'Maven 3.6.3'
     }
-  stages{
+    stages{
      stage('Maven clean & Install'){
         steps{
             script{
@@ -19,12 +17,15 @@ agent any
             }
         }
      }
-     stage('Build Docker Image'){
+     stage('Build Docker Image and Push'){
         steps{
             script {
-                docker.withRegistry('',registryCredential){
-                    def image = docker.build("srivallivajha/surveyjar:${env.dateTag}")
-                }
+                  docker.withRegistry('',registryCredential) {
+                        def image = docker.build('srivallivajha/surveyjar:'+ dateTag, '. --no-cache')
+                        docker.withRegistry('',registryCredential) {
+                            image.push()
+                        }
+                    }
             }
         }
      }
