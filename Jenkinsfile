@@ -1,6 +1,7 @@
 pipeline{
     
     environment {
+        registry = "srivallivajha/surveyjar"
         registryCredential = 'dockerhub'
         def dateTag = new Date().format("yyyyMMdd-HHmmss")
 	}
