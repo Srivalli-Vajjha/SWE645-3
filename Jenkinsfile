@@ -30,6 +30,13 @@ agent any
             }
         }
      }
+      stage('Deploying to single node in Rancher'){
+        steps{
+            script {
+                  sh 'kubectl set image deployment/deploy1 container-0=srivallivajha/surveyjar:'+dateTag
+            }
+        }
+     }
      }
  
   post {
