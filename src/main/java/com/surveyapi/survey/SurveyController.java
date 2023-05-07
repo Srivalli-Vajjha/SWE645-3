@@ -20,7 +20,7 @@ public class SurveyController {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
     public String Test() {
-        return "test7";
+        return "swe645 test";
     }
 
     @CrossOrigin
